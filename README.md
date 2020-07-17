@@ -64,3 +64,7 @@ Funcionalidad depositar, mostrando detalle del deposito realizado
 
 ![IMAGEN-DETALLECLIENTE](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/buscar2.jpg)
 
+6) Modelo relacional del proyecto
+
+![IMAGEN-MODELORELACIONAL](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/modelorelacional.jpg)
+
