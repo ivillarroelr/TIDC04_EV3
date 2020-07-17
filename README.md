@@ -6,6 +6,8 @@ Evaluacion 3 del ramo Programacion de componentes WEB, con profesor Cesar Ivan G
 Para inicializar el proyecto, es requerido tener el motor de base de datos postgreSQL, se recomienda la version 12. 
 Crear una base de datos vacia llamada prueba3, esto con el fin de que el proveedor de persistencia cree las entidades y relaciones requeridas. 
 
+Proyecto monolitico de Java en Spring Framework MVC con Spring Boot y Thymeleaf como gestor de templates.
+
 Se precargaron los siguientes datos de usuario en un script data.sql para la interaccion con el sistema
 
 - Ejecutivo 
