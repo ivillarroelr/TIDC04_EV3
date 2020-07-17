@@ -1,0 +1,89 @@
+ <!DOCTYPE html>
+ <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+<!-- debes definir el nombre del servlet que procesara el formulario-->
+
+<body class="blue">
+    <nav class="blue darken-3">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo"> &nbsp;ivillarroelr</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="buscar_cliente.html">Buscar</a></li>
+        <li><a href="crear_cuenta.html">Crear</a></li>
+        <li><a href="depositar.html">Depositar</a></li>
+      </ul>
+    </div>
+  </nav>
+        
+   
+
+    <div class="container">
+        <div class="card-panel">
+            <h3 class="center">
+                Buscar
+            </h3>
+            <form th:action="@{/buscar_cliente}" method="POST">
+                
+                <div class="input-field">
+                    <input id="rut" type="text" name="rut">
+                    <label for="rut">Rut cliente</label>
+                </div>
+                 
+                <button class="btn blue">
+                    buscar
+                </button>
+            </form>
+        </div>
+        <div class="card-panel" th:if="${boolean}">
+          <h3>Cliente: </h3>
+          <table>
+            <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Rut</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td><p th:text="${nombre}" /></td>
+                <td><p th:text="${apellido}" /></td>
+                <td><p th:text="${rut}" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-panel" th:if="${boolean}">
+          <h3>Movimientos: </h3>
+          <table>
+            <tr>
+              <th>Id</th>
+              <th>Descripcion</th>
+              <th>Fecha</th>
+              <th>Cuenta</th>
+          </tr>
+          <tr th:each="dt : ${movimientos}">
+              <td th:text="${dt.idmovimiento}"></td>
+              <td th:text="${dt.descripcion}"></td>
+              <td th:text="${dt.fecha}"></td>
+              <td th:text="${dt.cuentaFK.getNumerocta()}"></td>
+          </tr>
+          </table>
+        </div>
+
+    </div>
+<!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    </body>
+  </html> 
+
