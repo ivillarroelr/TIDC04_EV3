@@ -5,6 +5,7 @@ Los cambios contemplan:
 -Se agrega seguridad con Spring security, se describen distintos roles de acceso, configurados por tipo de usuario lo cual da acceso a distintas vistas.
 -Se agregan los controladores, servicios y vistas asociadas al cliente, con los servicios, ver saldo y depositar. 
 -Se agrega una custom Query. 
+-Se modifica el modelo relacional para que contemple al usuario y authorities requeridos por spring security
 
 # TIDC04_EV3
 Evaluacion 3 del ramo Programacion de componentes WEB, con profesor Cesar Ivan Gutierrez Hernandez, docente Inacap Santiago Sur. 
@@ -38,7 +39,24 @@ nombre: Catalina Villarroel
 rut: 181111113
 nombre: Camila Valdivia
 
+# Nuevas vistas para ev4
 
+1) Cliente 
+
+![IMAGEN-CLIENTE](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/cliente.jpg)
+
+2) Ver saldo
+
+![IMAGEN-VERSALDOCLIENTE](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/consultarsaldo.jpg)
+
+3) Depositar
+
+![IMAGEN-DEPOSITAR](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/depositarcliente.jpg)
+
+4) Modelo relacional actualizado
+
+
+![IMAGEN-NUEVOMODELO](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/nuevomodelo.jpg)
 
 # Vistas
 
@@ -71,6 +89,7 @@ Funcionalidad depositar, mostrando detalle del deposito realizado
 5) Visualizar detalle de cliente, con movimientos de deposito
 
 ![IMAGEN-DETALLECLIENTE](https://github.com/ivillarroelr/TIDC04_EV3/blob/master/readmefiles/buscar2.jpg)
+
 
 6) Modelo relacional del proyecto
 
