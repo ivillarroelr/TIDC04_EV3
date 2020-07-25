@@ -3,8 +3,10 @@ package me.ivillarroelr.prueba3.service.impl;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,8 +63,10 @@ public class CuentaServiceImpl implements ICuentaService {
         catch (NoSuchAlgorithmException e) {
         throw new RuntimeException(e);
         }
-        }
+    }
 
-
-    
+    @Override
+    public Set<Cuenta> cuentasUsuario(String rut) {
+        return repo.cuentasUsuario(rut);
+    }
 }

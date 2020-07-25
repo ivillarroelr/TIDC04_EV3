@@ -1,32 +1,28 @@
 package me.ivillarroelr.prueba3.controller;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.ModelAndView;
-
 import me.ivillarroelr.prueba3.dto.ClienteDTO;
 import me.ivillarroelr.prueba3.dto.CuentaDTO;
 import me.ivillarroelr.prueba3.dto.DepositoDTO;
-import me.ivillarroelr.prueba3.dto.EjecutivoDTO;
-
 import me.ivillarroelr.prueba3.model.Cliente;
 import me.ivillarroelr.prueba3.model.Cuenta;
-import me.ivillarroelr.prueba3.model.Ejecutivo;
 import me.ivillarroelr.prueba3.model.Movimientos;
 import me.ivillarroelr.prueba3.service.IClienteService;
 import me.ivillarroelr.prueba3.service.ICuentaService;
 import me.ivillarroelr.prueba3.service.IEjecutivoService;
 import me.ivillarroelr.prueba3.service.IMovimientosService;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
-public class AppController {
+public class EjecutivoController {
 
     @Autowired
     private IEjecutivoService servicioEjecutivo;
@@ -40,10 +36,11 @@ public class AppController {
     @Autowired
     private IMovimientosService servicioMovimientos;
 
-    @GetMapping({ "/", "/login" })
+
+    @GetMapping("/ejecutivo")
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("index");
+        model.setViewName("ejecutivo");
         return model;
     }
 
@@ -68,39 +65,20 @@ public class AppController {
         return model;
     }
 
-    @PostMapping("/login")
-    public ModelAndView login(@ModelAttribute("ejecutivo") EjecutivoDTO ejecutivo) {
-        Ejecutivo ej = servicioEjecutivo.leerPorId(ejecutivo.getRut());
-        ModelAndView model = new ModelAndView();
-        if (ej.getRut() == null) {
-            model.setViewName("index");
-            model.addObject("error", "Login fallido, el usuario no existe");
-            return model;
-        }
-        if (ej.getClave().equals(ejecutivo.getClave())) {
-            model.setViewName("ejecutivo");
-            return model;
-        } else {
-            model.setViewName("index");
-            model.addObject("error", "Login fallido, credenciales invalidas");
-            return model;
-        }
-    }
-
     @PostMapping("/buscar_cliente")
     public ModelAndView buscarCliente(@ModelAttribute("cliente") ClienteDTO cliente) {
         Cliente cl = servicioCliente.leerPorId(cliente.getRut());
         ModelAndView model = new ModelAndView();
-        if (cl.getRut() == null) {
+        if (cl.getUsuario().getRut() == null) {
             model.setViewName("buscar_cliente");
             model.addObject("error", "Cliente no existe en los registros");
             return model;
-        } else if (cl.getRut().equals(cliente.getRut())) {
+        } else if (cl.getUsuario().getRut().equals(cliente.getRut())) {
             model.setViewName("buscar_cliente");
             model.addObject("boolean", true);
-            model.addObject("rut", cl.getRut());
-            model.addObject("apellido", cl.getApellido());
-            model.addObject("nombre", cl.getNombre());
+            model.addObject("rut", cl.getUsuario().getRut());
+            model.addObject("apellido", cl.getUsuario().getApellido());
+            model.addObject("nombre", cl.getUsuario().getNombre());
             List<Movimientos> mv = servicioMovimientos.listar();
             model.addObject("movimientos", mv);
             return model;
@@ -115,7 +93,7 @@ public class AppController {
     public ModelAndView crearCuenta(@ModelAttribute("cuenta") CuentaDTO cuenta) {
         Cliente cl = servicioCliente.leerPorId(cuenta.getCliente());
         ModelAndView model = new ModelAndView();
-        if (cl.getRut() == null) {
+        if (cl.getUsuario().getRut() == null) {
             model.setViewName("crear_cuenta");
             model.addObject("error", "Cliente no existe en los registros");
             return model;
@@ -131,9 +109,9 @@ public class AppController {
         servicioCuenta.registrar(ct);
         model.setViewName("crear_cuenta");
         model.addObject("boolean", true);
-        model.addObject("nombre", cl.getNombre());
-        model.addObject("apellido", cl.getApellido());
-        model.addObject("rut", cl.getRut());
+        model.addObject("nombre", cl.getUsuario().getNombre());
+        model.addObject("apellido", cl.getUsuario().getApellido());
+        model.addObject("rut", cl.getUsuario().getRut());
         model.addObject("clave_transaccion", ct.getClavetransaccion());
         model.addObject("saldo", ct.getSaldo());
         model.addObject("saldo_linea_credito", ct.getSaldolineacredito());
@@ -162,19 +140,18 @@ public class AppController {
         Movimientos mv = new Movimientos();
         mv.setCuentaFK(ct);
         mv.setDescripcion(montoDeposito+" depositados por la aplicacion web");
-        LocalDateTime lt = LocalDateTime.now(); 
+        LocalDateTime lt = LocalDateTime.now();
         mv.setFecha(lt);
         servicioMovimientos.registrar(mv);
 
         model.setViewName("depositar");
         model.addObject("mostrar", true);
         model.addObject("numero_cuenta", ct.getNumerocta());
-        model.addObject("propietario", ct.getClienteFK().getRut());
+        model.addObject("propietario", ct.getClienteFK().getUsuario().getRut());
         model.addObject("saldo_previo", saldoPrevio);
         model.addObject("monto_deposito", montoDeposito);
         model.addObject("nuevo_saldo", nuevoSaldo);
         return model;
     }
-    
-    
+
 }

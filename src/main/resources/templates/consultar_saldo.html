@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<!-- debes definir el nombre del servlet que procesara el formulario-->
+
+
+<body class="blue">
+<nav class="blue darken-3">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo"> &nbsp;CLIENTE</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="consultar_saldo.html">Consultar saldo</a></li>
+            <li><a href="depositarcliente.html">Depositar</a></li>
+            <li> <a class="dropdown-item" onclick="logout()">Cerrar sesion</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="card-panel">
+        <h3>Detalle cliente</h3>
+        <table>
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Rut</td>
+                <td>Cuentas</td>
+            </tr>
+            <tr>
+                <td><p th:text="${nombre}" /></td>
+                <td><p th:text="${apellido}" /></td>
+                <td><p th:text="${rut}" /></td>
+                <div th:if="${cuentas.isEmpty()}">
+                    <td><p>No posee cuentas</p></td>
+                </div>
+                <div th:unless="${cuentas.isEmpty()}">
+                    <td><p th:text="${cuentas.size()}"></p></td>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container">
+    <div class="card-panel">
+        <h3>Cuenta creada</h3>
+        <table>
+            <tr>
+                <td>Cuenta</td>
+                <td>Saldo</td>
+                <td>Linea de credito disponible</td>
+                <td>Linea de credito utilizada</td>
+            </tr>
+            <tr>
+                <div th:if="${cuentas.isEmpty()}">
+                    <td col="4"><p>No posee cuentas</p></td>
+                </div>
+                <div th:unless="${cuentas.isEmpty()}">
+                    <tr th:each="cuenta : ${cuentas}">
+                    <td th:text="${cuenta.getNumerocta()}"></td>
+                    <td th:text="${cuenta.getSaldo()}"></td>
+                    <td th:text="${cuenta.getSaldolineacredito()}"></td>
+                    <td th:text="${cuenta.getSaldolineacreditousado()}"></td>
+                    </tr>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+    function logout(){
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Desconectado exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        window.setTimeout(function() {
+            window.location.href = '/logout';
+        }, 1500);
+
+    }
+</script>
+</body>
+</html>

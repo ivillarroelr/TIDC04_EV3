@@ -1,7 +1,22 @@
-INSERT INTO ejecutivo(rut, apellido, clave, nombre) VALUES('170411927','VILLARROEL','123','IVAN');
+-- ROLES
+INSERT INTO authority(id, authority) VALUES(1, 'CLIENTE');
+INSERT INTO authority(id, authority) VALUES(2, 'EJECUTIVO');
+INSERT INTO authority(id, authority) VALUES(3, 'ADMIN');
 
-INSERT INTO cliente(rut, apellido, clave, nombre, ejecutivofk) VALUES('190000001','RIVERA','123','FERNANDA','170411927');
+-- CREAR USUARIOS
 
-INSERT INTO cliente(rut, apellido, clave, nombre, ejecutivofk) VALUES('161111112','VILLARROEL','123','CATALINA','170411927');
+INSERT INTO usuario(rut, nombre, apellido, clave) VALUES('170411927', 'EJECUTIVO', 'COMERCIAL','$2a$04$zhr0t9H8VVMT24mFszKvw.iRA8S71PUrYEllG6F/xtb6K3F9JMEYC');
+INSERT INTO usuario(rut, nombre, apellido, clave) VALUES('c-1', 'USUARIO', 'UNO','$2a$04$zhr0t9H8VVMT24mFszKvw.iRA8S71PUrYEllG6F/xtb6K3F9JMEYC');
+INSERT INTO usuario(rut, nombre, apellido, clave) VALUES('c-2', 'USUARIO', 'DOS','$2a$04$zhr0t9H8VVMT24mFszKvw.iRA8S71PUrYEllG6F/xtb6K3F9JMEYC');
 
-INSERT INTO cliente(rut, apellido, clave, nombre, ejecutivofk) VALUES('181111113','VALDIVIA','123','CAMILA','170411927');
+-- EJECUTIVO
+INSERT INTO ejecutivo(usuario_rut) VALUES('170411927');
+
+-- CLIENTES
+INSERT INTO cliente(usuario_rut, ejecutivofk) VALUES('c-1','170411927');
+INSERT INTO cliente(usuario_rut, ejecutivofk) VALUES('c-2','170411927');
+
+-- ASOCIAR ROLES
+INSERT INTO authorities_users(usuario_id, authority_id) VALUES('170411927',2);
+INSERT INTO authorities_users(usuario_id, authority_id) VALUES('c-1',1);
+INSERT INTO authorities_users(usuario_id, authority_id) VALUES('c-2',1);

@@ -26,7 +26,17 @@
                     <input id="clave" type="password" name="clave">
                     <label for="clave">Clave</label>
                 </div>
-                <p th:text="${error}" />
+                <!--/*@thymesVar id="booleanerror" type="java"*/-->
+                <div class="text-center" th:if="${booleanerror}">
+                    <!--/*@thymesVar id="mensaje" type="java"*/-->
+                    <small style="color: red; font-weight: bold;" th:text="${mensaje}"></small>
+                </div>
+                
+                <!--/*@thymesVar id="logout" type="java"*/-->
+                <div class="text-center" th:if="${logout}">
+                    <!--/*@thymesVar id="mensaje" type="java"*/-->
+                    <small style="color: red; font-weight: bold;" th:text="${mensaje}"></small>
+                </div>
                 <button class="btn blue">
                     entrar
                 </button>
