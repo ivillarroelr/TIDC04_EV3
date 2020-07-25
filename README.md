@@ -2,10 +2,10 @@
 
 Los cambios contemplan: 
 
--Se agrega seguridad con Spring security, se describen distintos roles de acceso, configurados por tipo de usuario lo cual da acceso a distintas vistas.
--Se agregan los controladores, servicios y vistas asociadas al cliente, con los servicios, ver saldo y depositar. 
--Se agrega una custom Query. 
--Se modifica el modelo relacional para que contemple al usuario y authorities requeridos por spring security
+- Se agrega seguridad con Spring security, se describen distintos roles de acceso, configurados por tipo de usuario lo cual da acceso a distintas vistas.
+- Se agregan los controladores, servicios y vistas asociadas al cliente, con los servicios, ver saldo y depositar. 
+- Se agrega una custom Query. 
+- Se modifica el modelo relacional para que contemple al usuario y authorities requeridos por spring security
 
 # TIDC04_EV3
 Evaluacion 3 del ramo Programacion de componentes WEB, con profesor Cesar Ivan Gutierrez Hernandez, docente Inacap Santiago Sur. 
